@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalki Maa Noor Ananta - Life Timeline</title>
+    <meta name="description" content="A Chronicle of Divine Messages and World Events - The Life Timeline of Kalki Maa Noor Ananta">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>Loading Timeline...</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <h1 class="site-title">Kalki Maa Noor Ananta</h1>
+                    <p class="site-subtitle">A Chronicle of Divine Messages & World Events</p>
+                </div>
+                <div class="header-stats" id="header-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="total-events">0</span>
+                        <span class="stat-label">Events</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="total-years">0</span>
+                        <span class="stat-label">Years</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="nav-bar sticky">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-controls">
+                    <button class="btn btn-primary" id="view-all-btn">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M2 4h16M2 10h16M2 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        All Events
+                    </button>
+                    <button class="btn btn-secondary" id="timeline-view-btn">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <path d="M10 6v4l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Timeline
+                    </button>
+                </div>
+                
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search events, messages, predictions..." class="search-input">
+                    <button id="search-btn" class="search-btn">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <path d="M14 14l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <button class="btn btn-secondary" id="filter-btn">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M2 4h16M5 10h10M8 16h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    Filter
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Filter Panel -->
+    <div id="filter-panel" class="filter-panel hidden">
+        <div class="container">
+            <div class="filter-content">
+                <div class="filter-header">
+                    <h3>Filter by Category</h3>
+                    <button id="clear-filters-btn" class="btn-text">Clear All</button>
+                </div>
+                <div id="category-filters" class="category-filters">
+                    <!-- Categories will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year Navigation (for timeline view) -->
+    <div id="year-navigation" class="year-navigation hidden">
+        <div class="container">
+            <div class="year-nav-scroll" id="year-nav-scroll">
+                <!-- Year buttons will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Timeline View -->
+            <div id="timeline-container" class="timeline-container">
+                <!-- Events will be dynamically inserted here -->
+            </div>
+
+            <!-- No Results Message -->
+            <div id="no-results" class="no-results hidden">
+                <div class="no-results-content">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                        <circle cx="40" cy="40" r="35" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+                        <path d="M30 35h20M30 45h15" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+                    </svg>
+                    <h3>No events found</h3>
+                    <p>Try adjusting your search or filters</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Event Modal -->
+    <div id="event-modal" class="modal hidden">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <div id="modal-body" class="modal-body">
+                <!-- Event details will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>An Archive of Divine Messages and Life Events</p>
+                <p class="footer-years" id="footer-years">2016 - 2026</p>
+                <p class="footer-note">A Timeline for the Next 8000 Years</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
