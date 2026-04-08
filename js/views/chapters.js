@@ -44,6 +44,11 @@ export function renderChapters(container) {
                                     <span class="chapter-timeline-year">${year}</span>
                                 </div>
                                 <div class="chapter-card" style="border-left: 4px solid ${ch?.color || '#8B5CF6'}">
+                                    ${ch?.hero_event ? `
+                                        <img src="images/KalkiMaaNoorAnantaLife-${year}/${DataManager.getEventById(ch.hero_event)?.image || ''}"
+                                             alt="${ch?.title}" class="chapter-card-image" loading="lazy"
+                                             onerror="this.style.display='none'">
+                                    ` : ''}
                                     <div class="chapter-card-header">
                                         <span class="chapter-number">Chapter ${i + 1}</span>
                                         <h2 class="chapter-card-title">${ch?.title || year}</h2>

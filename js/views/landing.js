@@ -1,22 +1,10 @@
 import DataManager from '../data-manager.js';
 import Router from '../router.js';
 
-const ASPECT_ICONS = {
-    decode: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>',
-    justice: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 7l9-4 9 4M3 7v4l9 4 9-4V7"/></svg>',
-    identity: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M3 21v-2a7 7 0 0114 0v2"/></svg>',
-    energy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
-    shakti: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 8v8M8 12h8"/></svg>',
-    cosmic: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>',
-    warning: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>',
-    unity: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>'
-};
-
 export function renderLanding(container) {
     const site = DataManager.getSiteConfig();
     const proofPoints = DataManager.getProofPoints();
     const years = DataManager.getChapterYears();
-    const yp = DataManager.getYugParivartan();
 
     container.innerHTML = `
         <section class="hero">
@@ -95,27 +83,29 @@ export function renderLanding(container) {
             </div>
         </section>
 
-        ${yp ? `
         <section class="parivartan-section">
             <div class="container">
                 <div class="parivartan-header">
-                    <h2 class="section-heading">${yp.title}</h2>
-                    <p class="parivartan-meaning">${yp.meaning}</p>
-                    <p class="section-subheading">${yp.description}</p>
+                    <h2 class="section-heading">The Core Concepts</h2>
+                    <p class="parivartan-meaning">The Sanatan Mission of Yug Parivartan</p>
+                    <p class="section-subheading">12 interconnected ideas that define how the cosmic age turns — from Kaliyuga's darkness to Satyuga's truth</p>
                 </div>
                 <div class="aspects-grid">
-                    ${yp.aspects.map(a => `
+                    ${(DataManager.getCoreConcepts() || []).sort((a,b) => a.order - b.order).map((c, i) => `
                         <div class="aspect-card">
-                            <div class="aspect-icon">${ASPECT_ICONS[a.icon] || ''}</div>
-                            <h3 class="aspect-title">${a.title}</h3>
-                            <p class="aspect-subtitle">${a.subtitle}</p>
-                            <p class="aspect-desc">${a.description}</p>
+                            <div class="aspect-number">${String(i + 1).padStart(2, '0')}</div>
+                            <h3 class="aspect-title">${c.title}</h3>
+                            <p class="aspect-subtitle">${c.subtitle}</p>
                         </div>
                     `).join('')}
                 </div>
+                <div style="text-align:center;margin-top:2rem;">
+                    <button class="btn-cta-secondary" id="view-concepts-detail" style="color:white;border-color:rgba(255,255,255,0.3);">
+                        Read Full Cosmic Framework
+                    </button>
+                </div>
             </div>
         </section>
-        ` : ''}
 
         <section class="chapters-ribbon">
             <div class="container">
@@ -171,6 +161,9 @@ export function renderLanding(container) {
         Router.navigate('/prophecies');
     });
     container.querySelector('#view-cosmic')?.addEventListener('click', () => {
+        Router.navigate('/cosmic');
+    });
+    container.querySelector('#view-concepts-detail')?.addEventListener('click', () => {
         Router.navigate('/cosmic');
     });
     container.querySelector('#explore-all')?.addEventListener('click', () => {
