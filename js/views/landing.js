@@ -28,14 +28,17 @@ export function renderLanding(container) {
                 <div class="hero-divider"></div>
                 <p class="hero-description">${site.hero_description || ''}</p>
                 <div class="hero-actions">
-                    <button class="btn-cta" id="begin-story">
-                        Begin the Story
+                    <button class="btn-cta" id="begin-origins">
+                        The Origin Story (1984)
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </button>
+                    <button class="btn-cta-secondary" id="begin-story">
+                        The Seven Chapters (2016-2022)
+                    </button>
                     <button class="btn-cta-secondary" id="view-prophecies">
-                        View Decoded Prophecies
+                        Decoded Prophecies
                     </button>
                 </div>
             </div>
@@ -127,6 +130,9 @@ export function renderLanding(container) {
     `;
 
     // Event listeners
+    container.querySelector('#begin-origins').addEventListener('click', () => {
+        Router.navigate('/origins');
+    });
     container.querySelector('#begin-story').addEventListener('click', () => {
         Router.navigate('/chapters');
     });

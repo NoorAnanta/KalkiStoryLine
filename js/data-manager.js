@@ -72,6 +72,10 @@ const DataManager = {
         return this.narrativeConfig?.yug_parivartan || null;
     },
 
+    getOrigins() {
+        return this.narrativeConfig?.origins || null;
+    },
+
     getSiteConfig() {
         return this.narrativeConfig?.site || {};
     },

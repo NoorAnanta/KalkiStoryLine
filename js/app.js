@@ -8,6 +8,7 @@ import { renderEventDetail } from './views/event-detail.js';
 import { renderProphecies } from './views/prophecies.js';
 import { renderCosmic } from './views/cosmic.js';
 import { renderExplore } from './views/explore.js';
+import { renderOrigins } from './views/origins.js';
 
 const app = document.getElementById('app');
 const loadingScreen = document.getElementById('loading-screen');
@@ -66,6 +67,11 @@ function setupRoutes() {
     Router.add('/cosmic', () => {
         app.className = 'view-cosmic';
         renderCosmic(app);
+    });
+
+    Router.add('/origins', () => {
+        app.className = 'view-origins';
+        renderOrigins(app);
     });
 
     Router.add('/explore', () => {
