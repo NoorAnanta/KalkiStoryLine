@@ -1828,6 +1828,81 @@
     color: var(--text-secondary);
 }
 
+/* Core Concepts List */
+
+.core-concepts-section {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.concepts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.concept-card {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-base);
+}
+
+.concept-card:hover {
+    border-color: var(--primary-light);
+    box-shadow: var(--shadow-md);
+}
+
+.concept-number {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--primary-light);
+    opacity: 0.3;
+    min-width: 3rem;
+    line-height: 1;
+}
+
+.concept-content {
+    flex: 1;
+}
+
+.concept-title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.concept-subtitle {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    font-style: italic;
+    margin-bottom: 0.75rem;
+}
+
+.concept-desc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+    .concept-card {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .concept-number {
+        font-size: 1.5rem;
+    }
+}
+
 .cosmic-cta {
     text-align: center;
     margin-top: 3rem;

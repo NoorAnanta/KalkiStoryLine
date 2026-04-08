@@ -76,6 +76,10 @@ const DataManager = {
         return this.narrativeConfig?.origins || null;
     },
 
+    getCoreConcepts() {
+        return this.narrativeConfig?.core_concepts || [];
+    },
+
     getSiteConfig() {
         return this.narrativeConfig?.site || {};
     },

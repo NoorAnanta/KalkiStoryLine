@@ -4,6 +4,7 @@ import Router from '../router.js';
 export function renderCosmic(container) {
     const framework = DataManager.getCosmicFramework();
     const site = DataManager.getSiteConfig();
+    const concepts = DataManager.getCoreConcepts();
 
     if (!framework) {
         container.innerHTML = '<div class="container"><p>Cosmic framework data not available.</p></div>';
@@ -79,6 +80,25 @@ export function renderCosmic(container) {
                         `;
                     }).join('')}
                 </div>
+
+                ${concepts.length > 0 ? `
+                <div class="core-concepts-section">
+                    <h2 class="section-heading">The Core Concepts</h2>
+                    <p class="section-subheading">The essential ideas that define the Yug Parivartan — in order</p>
+                    <div class="concepts-list">
+                        ${concepts.sort((a, b) => a.order - b.order).map((c, i) => `
+                            <div class="concept-card" id="${c.id}">
+                                <div class="concept-number">${String(i + 1).padStart(2, '0')}</div>
+                                <div class="concept-content">
+                                    <h3 class="concept-title">${c.title}</h3>
+                                    <p class="concept-subtitle">${c.subtitle}</p>
+                                    <p class="concept-desc">${c.description}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
 
                 <div class="cosmic-cta">
                     <p>Now that you understand the framework, experience the story.</p>
