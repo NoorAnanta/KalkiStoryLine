@@ -287,6 +287,28 @@
     color: white;
 }
 
+/* Hero extras */
+
+.hero-divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-light), var(--secondary-color));
+    margin: 0 auto 1.5rem;
+}
+
+.hero-scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+}
+
 /* =====================================================
    PROOF POINTS SECTION
    ===================================================== */
@@ -344,6 +366,124 @@
 
 .proof-desc {
     font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* =====================================================
+   YUG PARIVARTAN ASPECTS SECTION
+   ===================================================== */
+
+.parivartan-section {
+    padding: 4rem 0;
+    background: linear-gradient(180deg, #0f0a1a 0%, #1a0533 100%);
+    color: white;
+}
+
+.parivartan-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.parivartan-header .section-heading {
+    color: white;
+    font-size: 2.25rem;
+}
+
+.parivartan-meaning {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--primary-light);
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.parivartan-header .section-subheading {
+    color: rgba(255, 255, 255, 0.65);
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.aspects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+}
+
+.aspect-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    transition: all var(--transition-base);
+}
+
+.aspect-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+.aspect-icon {
+    width: 36px;
+    height: 36px;
+    color: var(--primary-light);
+    margin-bottom: 1rem;
+}
+
+.aspect-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.aspect-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.aspect-subtitle {
+    font-size: 0.8rem;
+    color: var(--primary-light);
+    font-style: italic;
+    margin-bottom: 0.75rem;
+}
+
+.aspect-desc {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Parivartan Banner (in chapter detail) */
+
+.parivartan-banner {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(236, 72, 153, 0.08));
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.parivartan-label {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--primary-color);
+    background: rgba(139, 92, 246, 0.1);
+    padding: 0.2rem 0.75rem;
+    border-radius: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.parivartan-aspect-text {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-style: italic;
     color: var(--text-secondary);
     line-height: 1.5;
 }

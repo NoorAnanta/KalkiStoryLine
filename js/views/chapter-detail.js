@@ -56,6 +56,12 @@ export function renderChapterDetail(container, { year }) {
 
         <section class="chapter-narrative-section">
             <div class="container narrow">
+                ${ch?.parivartan_aspect ? `
+                    <div class="parivartan-banner">
+                        <span class="parivartan-label">Yug Parivartan</span>
+                        <p class="parivartan-aspect-text">${ch.parivartan_aspect}</p>
+                    </div>
+                ` : ''}
                 <p class="chapter-narrative-text">${ch?.narrative || ''}</p>
             </div>
         </section>

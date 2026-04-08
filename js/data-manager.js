@@ -68,6 +68,10 @@ const DataManager = {
         return this.narrativeConfig?.proof_points || [];
     },
 
+    getYugParivartan() {
+        return this.narrativeConfig?.yug_parivartan || null;
+    },
+
     getSiteConfig() {
         return this.narrativeConfig?.site || {};
     },
