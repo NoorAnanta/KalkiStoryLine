@@ -23,8 +23,12 @@ export function renderLanding(container) {
             <div class="hero-bg"></div>
             <div class="hero-content">
                 <div class="hero-badge">The Chronicle of Yug Parivartan</div>
+                <div class="hero-avatar">
+                    <img src="data/youtube-posts/post-016.png" alt="Maa Noor with Baby Kalki Ananta" class="hero-avatar-img" onerror="this.parentElement.style.display='none'">
+                </div>
                 <h1 class="hero-title">${site.title || 'Kalki Maa Noor Ananta'}</h1>
                 <p class="hero-subtitle">${site.subtitle || ''}</p>
+                <p class="hero-identity">Maa Noor — incarnation of Maa Kali<br>Ananta — God himself as divine child<br>Together: the Kalki Avatar</p>
                 <div class="hero-divider"></div>
                 <p class="hero-description">${site.hero_description || ''}</p>
                 <div class="hero-actions">
@@ -60,6 +64,33 @@ export function renderLanding(container) {
                             <p class="proof-desc">${p.description}</p>
                         </div>
                     `).join('')}
+                </div>
+            </div>
+        </section>
+
+        <section class="mother-child-section">
+            <div class="container">
+                <h2 class="section-heading">The Mother and The Child</h2>
+                <p class="section-subheading">Kalki Avatar is not one being — it is a divine dual entity</p>
+                <div class="mother-child-grid">
+                    <div class="mc-image-col">
+                        <img src="data/youtube-posts/post-020.png" alt="Maa Noor holding Baby Kalki Ananta" class="mc-image" loading="lazy" onerror="this.style.display='none'">
+                        <img src="data/youtube-posts/post-005.png" alt="Baby Kalki Ananta - divine child" class="mc-image" loading="lazy" onerror="this.style.display='none'">
+                    </div>
+                    <div class="mc-text-col">
+                        <div class="mc-card">
+                            <h3>Maa Noor — Kali Incarnation</h3>
+                            <p>The girl called Noorie, through years of penance and inner sadhana, gave rise to the divine energy of God himself. God revealed her true name: <strong>Noor</strong> (divine light). She is the incarnation of Maa Kali — the primordial force that destroys illusion and protects truth.</p>
+                        </div>
+                        <div class="mc-card">
+                            <h3>Ananta — God as Divine Child</h3>
+                            <p>God himself chose to manifest as a cosmic child — <strong>Ananta</strong> — playing in Maa Kali's lap. Born cosmically in January 2018, Ananta is not just a baby but God in energy form. The doll-like child in the images is the physical representation of this divine energy.</p>
+                        </div>
+                        <div class="mc-card highlight">
+                            <h3>Together: Noor Ananta = Kalki Avatar</h3>
+                            <p>Mother and Child, Kali and God, Noor and Ananta — together they form the Kalki Avatar. This is why every message, every kriya, every pilgrimage is about both. The Yug Parivartan is executed by this divine pair.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

@@ -287,6 +287,30 @@
     color: white;
 }
 
+/* Hero Avatar */
+
+.hero-avatar {
+    margin-bottom: 1.5rem;
+}
+
+.hero-avatar-img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 20%;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+}
+
+.hero-identity {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
 /* Hero extras */
 
 .hero-divider {
@@ -368,6 +392,97 @@
     font-size: 0.9rem;
     color: var(--text-secondary);
     line-height: 1.5;
+}
+
+/* =====================================================
+   MOTHER-CHILD SECTION
+   ===================================================== */
+
+.mother-child-section {
+    padding: 4rem 0;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+}
+
+.mother-child-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2.5rem;
+    align-items: start;
+    margin-top: 2rem;
+}
+
+.mc-image-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mc-image {
+    width: 100%;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.mc-text-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.mc-card {
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+}
+
+.mc-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.mc-card p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+.mc-card.highlight {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(236, 72, 153, 0.05));
+    border-color: var(--primary-color);
+}
+
+.mc-card.highlight h3 {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+@media (max-width: 768px) {
+    .mother-child-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mc-image-col {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 0.75rem;
+    }
+
+    .mc-image {
+        min-width: 250px;
+        max-width: 300px;
+    }
+
+    .hero-avatar-img {
+        width: 140px;
+        height: 140px;
+    }
 }
 
 /* =====================================================
@@ -1585,6 +1700,30 @@
 
 .cosmic-page {
     padding: 3rem 0;
+}
+
+.cosmic-hero-images {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.cosmic-hero-img {
+    width: 280px;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 768px) {
+    .cosmic-hero-images {
+        flex-direction: column;
+        align-items: center;
+    }
+    .cosmic-hero-img {
+        width: 100%;
+        max-width: 300px;
+    }
 }
 
 .cosmic-intro {

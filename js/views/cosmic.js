@@ -37,6 +37,10 @@ export function renderCosmic(container) {
         <main class="cosmic-page">
             <div class="container narrow">
                 <div class="cosmic-intro">
+                    <div class="cosmic-hero-images">
+                        <img src="data/youtube-posts/post-016.png" alt="Maa Noor with Baby Kalki Ananta" class="cosmic-hero-img" loading="lazy" onerror="this.style.display='none'">
+                        <img src="data/youtube-posts/post-002.png" alt="Mother and Child - divine pair" class="cosmic-hero-img" loading="lazy" onerror="this.style.display='none'">
+                    </div>
                     <p>${framework.intro}</p>
                 </div>
 
