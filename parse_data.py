@@ -266,41 +266,98 @@ def parse_text_file_enhanced(filepath):
         print(f"Error reading {filepath}: {e}")
         return None
 
+def parse_decoded_file(filepath):
+    """Parse a .decoded file for enriched description and Yug Parivartan aspect"""
+    try:
+        with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
+            content = f.read().strip()
+
+        if not content:
+            return None
+
+        # Extract Yug Parivartan aspect if tagged
+        parivartan_aspect = ''
+        aspect_match = re.search(r'Aspect(?:\s+of\s+Yug\s+Parivartan)?:\s*(.+?)(?:\.|$)', content)
+        if aspect_match:
+            parivartan_aspect = aspect_match.group(1).strip()
+
+        return {
+            'decoded_description': content,
+            'parivartan_aspect': parivartan_aspect,
+        }
+    except Exception as e:
+        print(f"  Warning: Error reading decoded file {filepath}: {e}")
+        return None
+
+
 def parse_year_folder(year_path):
     """Parse all events in a year folder"""
     events = []
     files = os.listdir(year_path)
     event_groups = defaultdict(dict)
-    
+
     for filename in files:
         filepath = os.path.join(year_path, filename)
-        
+
         if os.path.isdir(filepath):
             continue
-        
+
         file_info = parse_filename(filename)
         if not file_info:
             continue
-        
+
         event_key = f"{file_info['date_str']}-{file_info['serial']}"
-        
+
         if filename.endswith('.txt'):
             event_groups[event_key]['text_file'] = filename
             event_groups[event_key]['date_info'] = file_info
             event_groups[event_key]['text_path'] = filepath
-        elif filename.lower().endswith(('.jpg', '.jpeg', '.png', '.gif')):
+        elif filename.endswith('.decoded'):
+            event_groups[event_key]['decoded_path'] = filepath
+        elif filename.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.jepg')):
             event_groups[event_key]['image_file'] = filename
             event_groups[event_key]['date_info'] = file_info
-    
+
     for event_key, event_data in event_groups.items():
         if 'date_info' not in event_data:
             continue
-        
+
         date_info = event_data['date_info']
+
+        # Parse .txt file (primary source)
         text_data = None
         if 'text_path' in event_data:
             text_data = parse_text_file_enhanced(event_data['text_path'])
-        
+
+        # Parse .decoded file (enriched source)
+        decoded_data = None
+        if 'decoded_path' in event_data:
+            decoded_data = parse_decoded_file(event_data['decoded_path'])
+
+        # Build description: use .decoded if available and .txt is sparse
+        description = text_data.get('description', '') if text_data else ''
+        if decoded_data and decoded_data.get('decoded_description'):
+            # If .txt has no real content or is just a URL, use decoded as primary
+            if not text_data or not text_data.get('has_content', False):
+                description = decoded_data['decoded_description']
+            else:
+                # Append decoded insights if .txt already has content
+                description = description + '\n\n[Decoded from image] ' + decoded_data['decoded_description']
+
+        # Re-analyze the combined description for better categories
+        combined_text = description
+        keywords_data = extract_keywords_advanced(combined_text)
+        sentiment = analyze_sentiment(combined_text)
+        importance = calculate_importance_score(combined_text, keywords_data)
+
+        # If decoded file had original text_data, keep its URLs
+        urls = text_data.get('urls', []) if text_data else []
+
+        # Determine parivartan_aspect from decoded file
+        parivartan_aspect = ''
+        if decoded_data:
+            parivartan_aspect = decoded_data.get('parivartan_aspect', '')
+
         event = {
             'id': event_key,
             'date': date_info['date_str'],
@@ -311,19 +368,21 @@ def parse_year_folder(year_path):
             'image': event_data.get('image_file', ''),
             'has_image': 'image_file' in event_data,
             'text_file': event_data.get('text_file', ''),
-            'description': text_data.get('description', '') if text_data else '',
-            'has_content': text_data.get('has_content', False) if text_data else False,
-            'keywords': text_data.get('keywords', []) if text_data else [],
-            'categories': text_data.get('categories', []) if text_data else [],
-            'themes': text_data.get('themes', []) if text_data else [],
-            'sentiment': text_data.get('sentiment', 'neutral') if text_data else 'neutral',
-            'importance': text_data.get('importance', 0) if text_data else 0,
-            'urls': text_data.get('urls', []) if text_data else [],
+            'description': description,
+            'has_content': bool(description and len(description) > 10),
+            'keywords': keywords_data['keywords'],
+            'categories': keywords_data['categories'],
+            'themes': keywords_data['themes'],
+            'sentiment': sentiment,
+            'importance': importance,
+            'urls': urls,
             'type': text_data.get('type', 'event') if text_data else 'event',
+            'parivartan_aspect': parivartan_aspect,
+            'has_decoded': decoded_data is not None,
         }
-        
+
         events.append(event)
-    
+
     events.sort(key=lambda x: (x['year'], x['month'], x['day'], x['serial']))
     return events
 
@@ -391,7 +450,8 @@ def parse_all_data(base_path):
     
     high_importance = [e for e in data['all_events'] if e['importance'] >= 10]
     events_with_urls = [e for e in data['all_events'] if e['urls']]
-    
+    decoded_events = [e for e in data['all_events'] if e.get('has_decoded', False)]
+
     data['stats'] = {
         'total_years': len(data['years']),
         'total_events': len(data['all_events']),
@@ -399,6 +459,7 @@ def parse_all_data(base_path):
         'total_categories': len(data['all_categories']),
         'high_importance_events': len(high_importance),
         'events_with_references': len(events_with_urls),
+        'decoded_events': len(decoded_events),
         'top_categories': dict(list(data['category_counts'].items())[:10]),
     }
     
@@ -430,23 +491,24 @@ def main():
         json.dump(data, f, indent=2, ensure_ascii=False)
     
     print("\n" + "=" * 60)
-    print("✓ SUCCESS!")
+    print("SUCCESS!")
     print("=" * 60)
-    print(f"\n📊 Statistics:")
+    print(f"\n[Stats] Statistics:")
     print(f"  • Events: {data['stats']['total_events']}")
     print(f"  • Years: {data['stats']['years_covered']}")
     print(f"  • Categories: {data['stats']['total_categories']}")
     print(f"  • High-Importance: {data['stats']['high_importance_events']}")
     print(f"  • With References: {data['stats']['events_with_references']}")
+    print(f"  • With Decoded Images: {data['stats']['decoded_events']}")
     
-    print(f"\n🏷️  Top Categories:")
+    print(f"\n[Categories]  Top Categories:")
     for cat, count in list(data['stats']['top_categories'].items())[:5]:
         print(f"  • {cat}: {count}")
     
-    print(f"\n📖 Narrative Summary:")
+    print(f"\n[Narrative] Narrative Summary:")
     print(f"  {data['narrative_summary']}")
     
-    print(f"\n💾 Saved to: {output_file}")
+    print(f"\n[Saved] Saved to: {output_file}")
     print("=" * 60)
 
 if __name__ == '__main__':
