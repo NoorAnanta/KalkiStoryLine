@@ -80,6 +80,10 @@ const DataManager = {
         return this.narrativeConfig?.core_concepts || [];
     },
 
+    getTransitionTimeline() {
+        return this.narrativeConfig?.transition_timeline || null;
+    },
+
     getSiteConfig() {
         return this.narrativeConfig?.site || {};
     },

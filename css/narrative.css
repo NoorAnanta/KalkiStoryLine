@@ -1935,6 +1935,98 @@
 }
 
 /* =====================================================
+   TRANSITION TIMELINE (2016-2032)
+   ===================================================== */
+
+.transition-section,
+.transition-section-inline {
+    padding: 4rem 0;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+}
+
+.transition-section-inline {
+    margin-top: 3rem;
+    padding: 3rem 0 2rem;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.transition-phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.phase-card {
+    padding: 1.5rem;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    position: relative;
+    transition: all var(--transition-base);
+}
+
+.phase-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.phase-card.past {
+    border-left: 3px solid var(--primary-color);
+}
+
+.phase-card.current {
+    border-left: 3px solid var(--accent-color);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.03), rgba(245, 158, 11, 0.08));
+}
+
+.phase-card.future {
+    border-left: 3px solid var(--secondary-color);
+    opacity: 0.85;
+}
+
+.phase-period {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+}
+
+.phase-card.past .phase-period {
+    color: var(--primary-color);
+}
+
+.phase-card.current .phase-period {
+    color: var(--accent-color);
+}
+
+.phase-card.future .phase-period {
+    color: var(--secondary-color);
+}
+
+.phase-title {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.phase-desc {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+    .transition-phases {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =====================================================
    ORIGINS PAGE
    ===================================================== */
 

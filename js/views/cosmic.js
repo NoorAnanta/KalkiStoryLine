@@ -5,6 +5,7 @@ export function renderCosmic(container) {
     const framework = DataManager.getCosmicFramework();
     const site = DataManager.getSiteConfig();
     const concepts = DataManager.getCoreConcepts();
+    const tt = DataManager.getTransitionTimeline();
 
     if (!framework) {
         container.innerHTML = '<div class="container"><p>Cosmic framework data not available.</p></div>';
@@ -45,6 +46,22 @@ export function renderCosmic(container) {
                     </div>
                     <p>${framework.intro}</p>
                 </div>
+
+                ${tt ? `
+                <div class="transition-section-inline">
+                    <h2 class="section-heading">${tt.title}</h2>
+                    <p class="section-subheading">${tt.subtitle}</p>
+                    <div class="transition-phases">
+                        ${tt.phases.map((phase, i) => `
+                            <div class="phase-card ${i <= 2 ? 'past' : i <= 3 ? 'current' : 'future'}">
+                                <div class="phase-period">${phase.period}</div>
+                                <h3 class="phase-title">${phase.title}</h3>
+                                <p class="phase-desc">${phase.description}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
 
                 <div class="cosmic-sections">
                     ${framework.sections.map((section, i) => {
