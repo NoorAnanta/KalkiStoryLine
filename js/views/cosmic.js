@@ -21,6 +21,7 @@ export function renderCosmic(container) {
                     Home
                 </a>
                 <div class="nav-links">
+                    <a href="#/origins">Origins</a>
                     <a href="#/chapters">Chapters</a>
                     <a href="#/prophecies">Prophecies</a>
                     <a href="#/explore">Explore</a>

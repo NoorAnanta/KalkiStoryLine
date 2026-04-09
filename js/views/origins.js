@@ -23,6 +23,7 @@ export function renderOrigins(container) {
                     <a href="#/chapters">Chapters</a>
                     <a href="#/prophecies">Prophecies</a>
                     <a href="#/cosmic">Cosmic Framework</a>
+                    <a href="#/explore">Explore</a>
                 </div>
             </div>
         </nav>
